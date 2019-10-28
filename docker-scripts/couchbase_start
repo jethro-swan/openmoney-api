@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Use 'docker exec' rather than 'docker exec -it' for cron scripts.
+
+CONTAINER=`sudo docker ps -q`
+
+/usr/bin/sudo docker exec $CONTAINER /etc/init.d/couchbase-server start
+

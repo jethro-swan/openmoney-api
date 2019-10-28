@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# The name (YYYYMMDDhhmm) of the Couchbase backup is passed on the command
+# line. This is then restored from  /backup/<YYYYMMDDhhmm>/ inside the Docker
+# container
+
+# The value of COUCHBASE_ADMIN_PASSWORD is retrieved.
+source ../.env
+
+CONTAINER=`sudo docker ps -q`
+
+sudo docker exec $CONTAINER cbrestore  /backup/$1  -u admin -p $COUCHBASE_PASSWORD http://172.17.0.2:8091 --bucket-source=default
+sudo docker exec $CONTAINER cbrestore  /backup/$1  -u admin -p $COUCHBASE_PASSWORD http://172.17.0.2:8091 --bucket-source=openmoney_global
+sudo docker exec $CONTAINER cbrestore  /backup/$1  -u admin -p $COUCHBASE_PASSWORD http://172.17.0.2:8091 --bucket-source=oauth2Server  
+sudo docker exec $CONTAINER cbrestore  /backup/$1  -u admin -p $COUCHBASE_PASSWORD http://172.17.0.2:8091 --bucket-source=openmoney_stewards
+
+
