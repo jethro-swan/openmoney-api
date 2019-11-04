@@ -7,7 +7,7 @@
 # (2) The primary non-root user is "om".
 # (3) The usr "om" is able to run the sudo commands below without a password.
 # (4) The directory ~/backups/ has already been created.
-# (5) The directory /backup/ has already been created inside Couchbases's 
+# (5) The directory /backup/ has already been created inside Couchbases's
 #     Docker container.
 # (6) Couchbase's Docker container is the only one running inside this VM.
 
@@ -18,21 +18,20 @@ DATESTRING=`date +%Y%m%d%H%M`
 
 # The Couchbase admin password assigned by ~/openmoney-api/install.sh
 # and saved in ~/openmoney-api/.env
-source ../.env
+#source ../.env
 #source `pwd`/../.env
-#HERE=`pwd`
-#source $HERE/../.env
+HERE=`pwd`
+source $HERE/../.env
 
-sudo docker exec $CONTAINER cbbackup -u admin -p $COUCHBASE_ADMIN_PASSWORD http://172.17.0.2:8091 /backup/$DATESTRING
+sudo docker exec $CONTAINER cbbackup -u admin -p $COUCHBASE_ADMIN_PASSWORD \
+  http://172.17.0.2:8091 /backup/$DATESTRING
 
 # The DB backup is then tarballed ...
 sudo docker exec $CONTAINER tar zcf cbdata$DATESTRING.tar.gz /backup/$DATESTRING
 # ... and copied to the local backups directory
 sudo docker cp $CONTAINER:cbdata$DATESTRING.tar.gz $HERE/backups/
-sudo docker exec $CONTAINER rm cbdata$DATESTRING.tar.gz 
+sudo docker exec $CONTAINER rm cbdata$DATESTRING.tar.gz
 
 sudo chown -R om:om $HERE/backups
 
 echo $DATESTRING
-
-

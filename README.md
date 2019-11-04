@@ -4,9 +4,20 @@ The Openmoney API is a domain driven model of stewards, namespaces, currencies, 
 Stewards are the patrons of these namespaces, currencies, accounts and journals.
 
 # Install locally
+
+Copy
+  ~/om-api.config.example
+to
+  ~/om-api.config
+then edit
+  ~/om-api.config
+to provide appropriate values.
+
 ```sh
-git clone https://github.com/deefactorial/openmoney-api
+git clone https://github.com/jethro-swan/openmoney-api
 cd openmoney-api
+cp om-api.config.example om-api.config
+vi om-api.config
 ./install.sh
 ```
 
@@ -43,6 +54,9 @@ https://cloud.openmoney.cc/docs/
 
 Copyright [2019] [Dominique Legault]
 
+Minor revisions:
+  2019/11/03 John Waters
+  
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
 http://www.apache.org/licenses/LICENSE-2.0
