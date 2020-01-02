@@ -10,7 +10,7 @@ source om-api.config
 #set the environment variables for the node scripts
 COUCHBASE_IP=${3:-$(hostname -I | awk 'NR==1{print $1}')}
 cat $COUCHBASE_IP >> om-api.config
-cp om-api.config .evv # still needed temporarily
+cp om-api.config .env # still needed temporarily
 
 #output the status of script variables so you know what your values are
 cat .env
