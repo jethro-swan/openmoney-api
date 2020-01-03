@@ -5,6 +5,8 @@
 # (2) edit  om-api.config
 # (3) run  ./install.sh
 
+source includes/wait_progress_bar.sh
+
 #Setting script variables.
 source om-api.config
 COUCHBASE_IP=`hostname -I | awk 'NR==1{print $1}'`
@@ -33,7 +35,8 @@ sudo docker pull couchbase:community-2.2.0
 #run the docker container
 sudo docker run -d --name db -p 8091-8094:8091-8094 -p 11210:11210 couchbase:community-2.2.0
 
-sleep 60s # wait for it
+#sleep 60s # wait for it
+pause 60 # wait for it
 
 
 #setup the couchbase server installation and buckets
@@ -90,7 +93,8 @@ npm run install:db # install seed data into couchbase server buckets
 
 npm run start & # start the server and run in the foreground
 
-sleep 40s # wait for it
+pause 40 # wait for it
+#sleep 40s # wait for it
 
 npm run test	# run the tests and make sure they pass
 
