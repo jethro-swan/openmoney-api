@@ -1,3 +1,8 @@
+# PLEASE NOTE:  
+
+The installation stopped working in January 2020 following deprecation of Node v.8.  Do not attempt to install this until it has been updated to use Node v.10.
+
+
 # openmoney-api
 
 The Openmoney API is a domain driven model of stewards, namespaces, currencies, accounts, and journals.
