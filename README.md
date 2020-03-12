@@ -1,7 +1,8 @@
 # PLEASE NOTE:  
 
-The installation stopped working in January 2020 following deprecation of Node v.8.  Do not attempt to install this until it has been updated to use Node v.10.
+The installation stopped working on Ubuntu 16.04.x and 18.04.x in January 2020 following deprecation of Node v.8.  
 
+As it is, it can still be installed on Ubuntu 19.10.
 
 # openmoney-api
 
@@ -50,9 +51,13 @@ http://localhost:8080/docs/
 # Remote Documentation
 https://cloud.openmoney.cc/docs/
 
-# Uninstall
+# Uninstall database
 ```sh
-./uninstall.sh
+./uninstalldb.sh
+```
+# Re-install empty database
+```sh
+./reinstalldb.sh
 ```
 
 # License
@@ -60,8 +65,12 @@ https://cloud.openmoney.cc/docs/
 Copyright [2019] [Dominique Legault]
 
 Minor revisions:
+
   2019/11/03 John Waters
+  
   2020/01/04 John Waters
+  
+  2020/03/12 John Waters
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
