@@ -13,6 +13,7 @@ COUCHBASE_IP=`hostname -I | awk 'NR==1{print $1}'`
 cp om-api.config ./.env # (still needed temporarily elsewhere - for test scripts))
 echo "COUCHBASE_IP=$COUCHBASE_IP" >> ./.env
 cat ./.env # output the status of script variables so you know what your values are
+echo $COUCHBASE_ADMIN_PASSWORD > docker-scripts/cbap
 
 sudo apt-get update
 sudo apt-get install -y npm net-tools apt-transport-https ca-certificates curl software-properties-common
