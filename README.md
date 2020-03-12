@@ -1,6 +1,6 @@
 ### PLEASE NOTE:  
 
-The installation stopped working on Ubuntu 16.04.x and 18.04.x in January 2020.  
+The installation stopped working on Ubuntu 16.04.x and 18.04.x in January 2020, when Node 8 reached the end of its supported life.
 
 As it is, it can still be installed on Ubuntu 19.10.
 
