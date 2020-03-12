@@ -1,15 +1,15 @@
-# PLEASE NOTE:  
+### PLEASE NOTE:  
 
 The installation stopped working on Ubuntu 16.04.x and 18.04.x in January 2020.  
 
 As it is, it can still be installed on Ubuntu 19.10.
 
-# openmoney-api
+### openmoney-api
 
 The Openmoney API is a domain driven model of stewards, namespaces, currencies, accounts, and journals.
 Stewards are the patrons of these namespaces, currencies, accounts and journals.
 
-# Install locally
+### Install locally
 
 Copy
   ~/om-api.config.example
@@ -27,40 +27,40 @@ vi om-api.config
 ./install.sh
 ```
 
-# Run locally on port 8080
+### Run locally on port 8080
 ```sh
 npm run start
 #Control-C to quit
 ```
 
-# Run in a background service
+### Run in a background service
 ```sh
 sudo npm install pm2 -g
 pm2 start app.js --name "openmoney-api"
 ```
 
-# Test
+### Test
 ```sh
 #ensure the server is running locally or in background then run
 npm run test
 ```
 
-# Local Documentation
+### Local Documentation
 http://localhost:8080/docs/
 
-# Remote Documentation
+### Remote Documentation
 https://cloud.openmoney.cc/docs/
 
-# Uninstall database
+### Uninstall database
 ```sh
 ./uninstalldb.sh
 ```
-# Re-install empty database
+### Re-install empty database
 ```sh
 ./reinstalldb.sh
 ```
 
-# License
+### License
 
 Copyright [2019] [Dominique Legault]
 
