@@ -7,7 +7,7 @@
 SNAPSHOT=$1
 
 # The value of COUCHBASE_ADMIN_PASSWORD is retrieved.
-source ../.env
+COUCHBASE_ADMIN_PASSWORD=$(cat cbap)
 
 CONTAINER=`sudo docker ps -q`
 
