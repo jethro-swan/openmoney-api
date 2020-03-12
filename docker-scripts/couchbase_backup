@@ -21,7 +21,8 @@ DATESTRING=`date +%Y%m%d%H%M`
 #source ../.env
 #source `pwd`/../.env
 HERE=`pwd`
-source $HERE/../.env
+#source $HERE/../.env
+COUCHBASE_ADMIN_PASSWORD=$(cat cbap)
 
 sudo docker exec $CONTAINER cbbackup -u admin -p $COUCHBASE_ADMIN_PASSWORD \
   http://172.17.0.2:8091 /backup/$DATESTRING
