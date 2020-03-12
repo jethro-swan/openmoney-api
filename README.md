@@ -1,6 +1,6 @@
 # PLEASE NOTE:  
 
-The installation stopped working on Ubuntu 16.04.x and 18.04.x in January 2020 following deprecation of Node v.8.  
+The installation stopped working on Ubuntu 16.04.x and 18.04.x in January 2020, apparently following deprecation of Node v.8.  
 
 As it is, it can still be installed on Ubuntu 19.10.
 
