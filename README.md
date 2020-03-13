@@ -52,10 +52,17 @@ http://localhost:8080/docs/
 https://cloud.openmoney.cc/docs/
 
 ### Uninstall database
+
+Clear the database before re-installing:
+
 ```sh
 ./uninstalldb.sh
 ```
 ### Re-install empty database
+
+This duplicates the essential later stages of install.sh, omitting the Node and Docker installation, etc.
+It is used to re-populate that initial database after it has been cleared using uninstalldb.sh (which was previously named uninstall.sh).
+
 ```sh
 ./reinstalldb.sh
 ```
