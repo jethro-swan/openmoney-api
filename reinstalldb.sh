@@ -1,42 +1,15 @@
 #!/bin/bash
-#installation script
-#
-# (1) copy  om-api.config.sample  to  om-api.config
-# (2) edit  om-api.config
-# (3) run  ./install.sh
 
 source includes/wait_progress_bar.sh
 
 #Setting script variables.
-source om-api.config
-COUCHBASE_IP=`hostname -I | awk 'NR==1{print $1}'`
-cp om-api.config ./.env # (still needed temporarily elsewhere - for test scripts))
-echo "COUCHBASE_IP=$COUCHBASE_IP" >> ./.env
-cat ./.env # output the status of script variables so you know what your values are
-
-#sudo apt-get update
-##sudo apt-get install -y npm net-tools apt-transport-https ca-certificates curl software-properties-common
-##curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-##sudo apt-key fingerprint 0EBFCD88
-##sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-##   $(lsb_release -cs) \
-##   stable"
-##sudo apt-get update
-##sudo apt-get install docker-ce
-##curl -sL https://deb.nodesource.com/setup_8.x | sudo bash -
-##sudo apt-get install -y nodejs
-##sudo npm install -g n
-##sudo n 8.11.3
-
-#pull the couchbase database docker container
-##sudo docker pull couchbase:community-2.2.0
+source .env # retrieve values generated during the initial installation
 
 #run the docker container
 sudo docker run -d --name db -p 8091-8094:8091-8094 -p 11210:11210 couchbase:community-2.2.0
 
 #sleep 60s # wait for it
 pause 60 # wait for it
-
 
 #setup the couchbase server installation and buckets
 curl -f -w '\n%{http_code}\n' -X POST http://localhost:8091/nodes/self/controller/settings \
