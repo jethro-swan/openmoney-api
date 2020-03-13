@@ -30,8 +30,8 @@ vi om-api.config
 ### Run locally on port 8080
 ```sh
 npm run start
-#Control-C to quit
 ```
+Control-C to quit
 
 ### Run in a background service
 ```sh
@@ -40,13 +40,16 @@ pm2 start app.js --name "openmoney-api"
 ```
 
 ### Test
+
+Ensure the server is running locally or in background then run
 ```sh
-#ensure the server is running locally or in background then run
 npm run test
 ```
 
 ### Local Documentation
 http://localhost:8080/docs/
+
+Currently all example cURL strings generated point to the remote site https://cloud.openmoney.cc rather than to the local instance. This problem will be addressed in due course.
 
 ### Remote Documentation
 https://cloud.openmoney.cc/docs/
