@@ -21,8 +21,9 @@ DATESTRING=`date +%Y%m%d%H%M`
 #source ../.env
 #source `pwd`/../.env
 HERE=`pwd`
-#source $HERE/../.env
-COUCHBASE_ADMIN_PASSWORD=$(cat cbap)
+source $HERE/../.env
+COUCHBASE_ADMIN_PASSWORD=$(cat ./cbap)  # retrieve from value generated and
+                                        # saved during initial installation
 
 sudo docker exec $CONTAINER cbbackup -u admin -p $COUCHBASE_ADMIN_PASSWORD \
   http://172.17.0.2:8091 /backup/$DATESTRING
@@ -30,9 +31,9 @@ sudo docker exec $CONTAINER cbbackup -u admin -p $COUCHBASE_ADMIN_PASSWORD \
 # The DB backup is then tarballed ...
 sudo docker exec $CONTAINER tar zcf cbdata$DATESTRING.tar.gz /backup/$DATESTRING
 # ... and copied to the local backups directory
-sudo docker cp $CONTAINER:cbdata$DATESTRING.tar.gz $HERE/backups/
+sudo docker cp $CONTAINER:cbdata$DATESTRING.tar.gz ~/backups/
 sudo docker exec $CONTAINER rm cbdata$DATESTRING.tar.gz
 
-sudo chown -R om:om $HERE/backups
+sudo chown -R om:om ~/backups
 
-echo $DATESTRING
+#echo $DATESTRING
