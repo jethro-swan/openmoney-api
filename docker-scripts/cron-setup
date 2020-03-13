@@ -1,0 +1,3 @@
+#!/bin/bash
+
+(crontab -l 2>/dev/null; echo "30 * * * * /home/om/docker-scripts/couchbase_backup") | crontab -
