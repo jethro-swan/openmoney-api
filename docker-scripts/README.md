@@ -17,8 +17,7 @@ It is assumed that
 ```
 cd
 mkdir backup
-
-ln -s openmoney-api/docker-scripts .
+ln -s openmoneAssumptionsy-api/docker-scripts .
 ```
 
 (2) Set up cron job
