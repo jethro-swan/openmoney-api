@@ -17,11 +17,14 @@ CONTAINER=`sudo docker ps -q`
 DATESTRING=`date +%Y%m%d%H%M`
 
 # The Couchbase admin password assigned by ~/openmoney-api/install.sh
-# and saved in ~/openmoney-api/.env
+# and saved in both  
+#   ~/openmoney-api/.env
+# and
+#   ~/openmoney-api/docker-scripts/cbap
 #source ../.env
 #source `pwd`/../.env
-HERE=`pwd`
-source $HERE/../.env
+#HERE=`pwd`
+#source $HERE/../.env
 COUCHBASE_ADMIN_PASSWORD=$(cat ./cbap)  # retrieve from value generated and
                                         # saved during initial installation
 
