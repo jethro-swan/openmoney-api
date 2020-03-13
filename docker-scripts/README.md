@@ -17,10 +17,15 @@ It is assumed that
 ```
 cd
 mkdir backup
-ln -s openmoneAssumptionsy-api/docker-scripts .
 ```
 
-(2) Set up cron job
+(2) Shorten absolute path to script
+
+```
+ln -s openmoney-api/docker-scripts .
+```
+
+(3) Set up cron job
 
 Copy/paste line from
     openmoney-api/docker-scripts/example.crontab
