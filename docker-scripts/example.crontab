@@ -1,9 +1,11 @@
 # Add the lines below to your crontab
 #
 # Assuming this script is run as a cron job within a VM, a separate cron job on
-# the VM's host should bet set to backup the VM's ~/backups/ directory (e.g. by
+# the VM's host should bet set to backup the VM's ~/backup/ directory (e.g. by
 # use of rsnapshot.)
 #
 # e.g. Ffor an hourly backup:
 # m     h       dom     mon     dow     command
-0       *       *       *       *       /home/om/scripts/sh/couchbase_backup
+#0       *       *       *       *       /home/om/scripts/sh/couchbase_backup
+# m     h       dom     mon     dow     command
+0       *       *       *       *       /home/om/openmoney-api/docker_scripts/couchbase_backup
