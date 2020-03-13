@@ -1,4 +1,6 @@
-ed with this version of the Open Money API.
+
+A collection of scripts to work with the Dockerized version of Couchbase (2.2.0)
+used with this version of the Open Money API.
 
 It is assumed that the Open Money components are running together within a
 virtual machine and that no other Docker container is running.
