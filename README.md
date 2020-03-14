@@ -76,11 +76,7 @@ Copyright [2019] [Dominique Legault]
 
 Minor revisions:
 
-  2019/11/03 John Waters
-  
-  2020/01/04 John Waters
-  
-  2020/03/12 John Waters
+  2019/11/03 - 2020/03/14 John Waters
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
