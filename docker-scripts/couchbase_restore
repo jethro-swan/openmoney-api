@@ -7,7 +7,7 @@
 SNAPSHOT=$1
 
 # The value of COUCHBASE_ADMIN_PASSWORD is retrieved.
-COUCHBASE_ADMIN_PASSWORD=$(cat cbap)
+COUCHBASE_ADMIN_PASSWORD=$(cat ./cbap)
 
 CONTAINER=`sudo docker ps -q`
 
@@ -16,20 +16,9 @@ restore ()
     sudo docker exec $CONTAINER cbrestore  /backup/$SNAPSHOT \
     -u admin -p $COUCHBASE_ADMIN_PASSWORD http://172.17.0.2:8091 \
     --bucket-source=$1 --bucket-destination=$1
-#    -b $1 -B $1
 }
 
 restore 'default'
 restore 'openmoney_global'
 restore 'oauth2Server'
 restore 'openmoney_stewards'
-
-
-
-
-
-
-#sudo docker exec $CONTAINER cbrestore  /backup/$1  -u admin -p $COUCHBASE_PASSWORD http://172.17.0.2:8091 --bucket-source=default
-#sudo docker exec $CONTAINER cbrestore  /backup/$1  -u admin -p $COUCHBASE_PASSWORD http://172.17.0.2:8091 --bucket-source=openmoney_global
-#sudo docker exec $CONTAINER cbrestore  /backup/$1  -u admin -p $COUCHBASE_PASSWORD http://172.17.0.2:8091 --bucket-source=oauth2Server
-#sudo docker exec $CONTAINER cbrestore  /backup/$1  -u admin -p $COUCHBASE_PASSWORD http://172.17.0.2:8091 --bucket-source=openmoney_stewards
