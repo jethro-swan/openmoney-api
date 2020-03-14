@@ -46,12 +46,12 @@ Ensure the server is running locally or in background then run
 npm run test
 ```
 
-### Local Documentation
+### Local documentation
 http://localhost:8080/docs/
 
 Currently all example cURL strings generated point to the remote site https://cloud.openmoney.cc rather than to the local instance. This problem will be addressed in due course.
 
-### Remote Documentation
+### Remote documentation
 https://cloud.openmoney.cc/docs/
 
 ### Uninstall database
