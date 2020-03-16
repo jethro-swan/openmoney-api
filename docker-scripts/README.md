@@ -9,7 +9,7 @@ virtual machine and that no other Docker container is running.
 ### Preparation
 
 It is assumed that 
-- the OM code is isolated within a VM 
+- the OM code (including the Dockerized Couchbase) is isolated within a VM 
 - the only non-root user is "om"
 - user "om" has passwordless sudo access
 
@@ -29,9 +29,4 @@ ln -s openmoney-api/docker-scripts .
 
 ```
 openmoney-api/docker-scripts/cron-setup
-```
-
-or copy/paste line from
-``` 
-cat openmoney-api/docker-scripts/example.crontab
 ```
