@@ -26,6 +26,7 @@ ln -s openmoney-api/docker-scripts .
 ```
 
 (3) Set up cron job
+
 Run
 ```
 openmoney-api/docker-scripts/cron-setup
