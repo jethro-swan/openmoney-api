@@ -1,9 +1,9 @@
 #!/bin/sh
 # couchbase_backup <couchbase admin password>
-# Last modified: 2020/03/14 20.30 John Waters
+# Last modified: 2020/03/16 20.40 John Waters
 
 # Assumptions:
-# (1) The OM instance has a VM almost to itself.
+# (1) The OM instance has a VM (almost) to itself.
 # (2) The primary non-root user is "om" and has passwordless sudo access.
 # (3) The usr "om" is able to run the sudo commands below without a password.
 # (4) The directory /home/om/backup/ has already been created.
@@ -22,8 +22,8 @@ DATESTRING=`date +%Y%m%d%H%M`
 # and
 #   /home/om/openmoney-api/docker-scripts/cbap
 
-COUCHBASE_ADMIN_PASSWORD=$(cat ./cbap)  # retrieve from value generated and
-                                        # saved during initial installation
+# Retrieve from value generated and saved during initial installation
+COUCHBASE_ADMIN_PASSWORD=$(cat /home/om/docker-scripts/cbap)
 
 sudo docker exec $CONTAINER cbbackup -u admin -p $COUCHBASE_ADMIN_PASSWORD \
   http://172.17.0.2:8091 /backup/$DATESTRING
@@ -35,5 +35,3 @@ sudo docker cp $CONTAINER:cbdata$DATESTRING.tar.gz /home/om/backups/
 sudo docker exec $CONTAINER rm cbdata$DATESTRING.tar.gz
 
 sudo chown -R om:om /home/om/backups
-
-#echo $DATESTRING
