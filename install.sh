@@ -1,9 +1,8 @@
 #!/bin/bash
 #installation script
 #
-# (1) copy  om-api.config.sample  to  om-api.config
-# (2) edit  om-api.config
-# (3) run  ./install.sh
+# (1) run  ./set-constants -u <API URL> -m <admin email> -N <root namespace> -C <root currency>
+# (2) run  ./install.sh
 
 source includes/wait_progress_bar.sh
 
@@ -107,7 +106,6 @@ sleep 30s
 #
 #verify installation was correct
 sudo docker run couchbase:community-2.2.0 /bin/sh -c "cd /opt/couchbase/bin; couchbase-cli bucket-list -c ${COUCHBASE_IP} -u ${COUCHBASE_ADMIN_USERNAME} -p ${COUCHBASE_ADMIN_PASSWORD} -d"
-
 
 npm install 	# install dependencies
 # sudo npm install
