@@ -22,8 +22,7 @@ to provide appropriate values.
 ```sh
 git clone https://github.com/jethro-swan/openmoney-api
 cd openmoney-api
-cp om-api.config.example om-api.config
-vi om-api.config
+./set-constants -u <API URL> -m <admin email> [-N <root namespace>] [-C <root currency>]
 ./install.sh
 ```
 
