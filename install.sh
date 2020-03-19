@@ -35,7 +35,6 @@ sudo docker pull couchbase:community-2.2.0
 
 #run the docker container
 sudo docker run -d --name db -p 8091-8094:8091-8094 -p 11210:11210 couchbase:community-2.2.0
-<<<<<<< HEAD
 
 #sleep 60s # wait for it
 pause 60 # wait for it
@@ -85,7 +84,7 @@ sleep 30s # wait for it
 
 
 # verify installation was correct
-=======
+sudo docker run couchbase:community-2.2.0 /bin/sh -c "cd /opt/couchbase/bin; couchbase-cli bucket-list -c ${COUCHBASE_IP} -u ${COUCHBASE_ADMIN_USERNAME} -p ${COUCHBASE_ADMIN_PASSWORD} -d"
 #
 #Wait for it
 sleep 20s
@@ -106,7 +105,6 @@ curl -b /tmp/cookie -w '\n%{http_code}\n' -f -X POST http://localhost:8091/pools
 sleep 30s
 #
 #verify installation was correct
->>>>>>> upstream/master
 sudo docker run couchbase:community-2.2.0 /bin/sh -c "cd /opt/couchbase/bin; couchbase-cli bucket-list -c ${COUCHBASE_IP} -u ${COUCHBASE_ADMIN_USERNAME} -p ${COUCHBASE_ADMIN_PASSWORD} -d"
 
 
