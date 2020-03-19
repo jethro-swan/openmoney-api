@@ -24,6 +24,7 @@ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubun
    $(lsb_release -cs) \
    stable"
 sudo apt-get update
+sudo apt install apg
 sudo apt-get install -y docker-ce
 curl -sL https://deb.nodesource.com/setup_8.x | sudo bash -
 sudo apt-get install -y nodejs
