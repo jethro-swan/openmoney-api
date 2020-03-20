@@ -90,6 +90,7 @@ fi
 
 sed -i "s/cloud\.openmoney\.cc/$API_URL/g" api/swagger/swagger.yaml
 sed -i "s/cloud\.openmoney\.cc/$API_URL/g" api/swagger/swagger.json
+sed -i "s/cloud\.openmoney\.cc/$API_URL/g" api/oauth2server/db/clients.js
 
 cp includes/om-api.config.example om-api.config
 sed -i "s/admin@example\.net/$ADMIN_EMAIL/" om-api.config
