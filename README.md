@@ -16,6 +16,7 @@ git clone https://github.com/jethro-swan/openmoney-api
 cd openmoney-api
 ```
 Set initial values:
+
 ./set-constants -u <API URL> -m <admin email> [-N <root namespace>] [-C <root currency>]
 e.g.
 ```sh
