@@ -11,20 +11,26 @@ Stewards are the patrons of these namespaces, currencies, accounts and journals.
 
 ### Install locally
 
-Copy
-  ~/om-api.config.example
-to
-  ~/om-api.config
-then edit
-  ~/om-api.config
-to provide appropriate values.
-
 ```sh
 git clone https://github.com/jethro-swan/openmoney-api
 cd openmoney-api
+```
+Set initial values:
 ./set-constants -u <API URL> -m <admin email> [-N <root namespace>] [-C <root currency>]
+e.g.
+```sh
+./set-constants -u om-instance.somewhere.cc -m adi.minster@somewhere.cc
+```
+or
+```sh
+./set-constants -u om-instance.somewhere.cc -m adi.minster@somewhere.cc -N ca -C hours
+```
+then run the installation script:
+```sh
 ./install.sh
 ```
+NB, this will generate passwords automatically for the Couchbase  adminstrator and the network adminstrator. These can then be found in the .env file.
+
 
 ### Run locally on port 8080
 ```sh
@@ -53,16 +59,15 @@ Currently all example cURL strings generated point to the remote site https://cl
 ### Remote documentation
 https://cloud.openmoney.cc/docs/
 
-### Uninstall database
+### Uninstall database and re-install
 
-Clear the database before re-installing:
+If re-installation becomes necessary, first uninstall the database:
 
 ```sh
 ./uninstalldb.sh
 ```
-### Re-install empty database
 
-This duplicates the essential later stages of install.sh, omitting the Node and Docker installation, etc.
+The following script duplicates the essential later stages of install.sh, omitting the Node and Docker installation, etc.
 It is used to re-populate that initial database after it has been cleared using uninstalldb.sh (which was previously named uninstall.sh).
 
 ```sh
@@ -73,9 +78,7 @@ It is used to re-populate that initial database after it has been cleared using 
 
 Copyright [2019] [Dominique Legault]
 
-Minor revisions:
-
-  2019/11/03 - 2020/03/14 John Waters
+Minor revisions: 2019/11/03 - 2020/03/21 John Waters
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
