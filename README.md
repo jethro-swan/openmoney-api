@@ -17,7 +17,7 @@ cd openmoney-api
 ```
 Set initial values:
 
-./set-constants -u <API URL> -m <admin email> [-N <root namespace>] [-C <root currency>]
+./set-constants -u <<API URL>> -m <<admin email>> [-N <root namespace>] [-C <root currency>]
 e.g.
 ```sh
 ./set-constants -u om-instance.somewhere.cc -m adi.minster@somewhere.cc
