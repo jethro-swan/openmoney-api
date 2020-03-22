@@ -46,24 +46,28 @@ sudo npm install pm2 -g
 pm2 start app.js --name "openmoney-api"
 ```
 
+### Start and Stop DB
+
+```sh
+npm run start:db
+npm run stop:db
+```
+
 ### Test
 
-Ensure the server is running locally or in background then run
 ```sh
 npm run test
 ```
 
-### Local documentation
+### Local Documentation
+
 http://localhost:8080/docs/
 
-Currently all example cURL strings generated point to the remote site https://cloud.openmoney.cc rather than to the local instance. This problem will be addressed in due course.
+### Remote Documentation
 
-### Remote documentation
 https://cloud.openmoney.cc/docs/
 
-### Uninstall database and re-install
-
-If re-installation becomes necessary, first uninstall the database:
+### Uninstall
 
 ```sh
 ./uninstalldb.sh

@@ -1,10 +1,11 @@
 var NodeRSA = require('node-rsa');
 var couchbase = require('couchbase');
 var cluster = new couchbase.Cluster(`couchbase://${process.env.COUCHBASE_LO}`);
+    cluster.authenticate(process.env.COUCHBASE_ADMIN_USERNAME, process.env.COUCHBASE_ADMIN_PASSWORD);
 var openmoney_bucket = cluster.openBucket('openmoney_global');
 var crypto = require('crypto');
 
-require('dotenv').load();
+require('dotenv').config();
 
 if(typeof process.env.API_HOST === 'undefined'){
   process.env.API_HOST = 'http://localhost';
