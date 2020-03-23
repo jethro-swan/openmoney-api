@@ -24,8 +24,9 @@ EMAIL_RE='^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$'
 NAMESPACE_RE='^[a-z]{1,20}$'
 CURRENCY_RE='^[a-z]{1,5}$'
 
-ROOT_NAMESPACE='cc'
-ROOT_CURRENCY='cc'
+# default values
+ROOT_NAMESPACE=cc
+ROOT_CURRENCY=cc
 
 while [ -n "$(echo $1 | grep '^-[uaNCh]$')" ]; do
     case $1 in
@@ -47,7 +48,9 @@ while [ -n "$(echo $1 | grep '^-[uaNCh]$')" ]; do
                  exit 1
              fi
              ;;
-        -N ) if [[ $2 =~ $NAMESPACE_RE ]]; then
+        -N ) if [ -z $2 ]; then
+                 ROOT_NAMESPACE=cc # default
+             elif [[ $2 =~ $NAMESPACE_RE ]]; then
                  ROOT_NAMESPACE=$2
                  shift
              else
@@ -56,7 +59,9 @@ while [ -n "$(echo $1 | grep '^-[uaNCh]$')" ]; do
                  exit 1
              fi
              ;;
-        -C ) if [[ $2 =~ $CURRENCY_RE ]]; then
+        -C ) if [ -z $2 ]; then
+                 ROOT_CURRENCY=cc # default	
+             elif [[ $2 =~ $CURRENCY_RE ]]; then
                  ROOT_CURRENCY=$2
                  shift
              else
