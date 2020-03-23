@@ -1,24 +1,25 @@
 #!/bin/bash
-# installation script
+
+# installation/setup script
 #
-# ./setup.sh -u <API URL> -a <admin email> [-N <root namespace>] [-C <root currency>]
+# ./setup.sh -u <API URL> -a <admin email> [-N <root namespace>] [-C <root currency>
 
 usage()
 {
     echo
-    echo "usage: setup.sh -u <API URL>"
-    echo "                -a <admin email>"
-    echo "                [-N <root namespace>]"
-    echo "                    root namespace"
-    echo "                    - from 2 to 20 lower case alphanumeric characters"
-    echo "                    - first character must be letter"
-    echo "                    (default = 'cc')"
-    echo "                [-C <root currency>]"
-    echo "                    root currency"
-    echo "                    - from 1 to 5 lower case alphanumeric characters"
-    echo "                    - first character must be letter"
-    echo "                    (default = 'cc')"
-    echo "                [-h] show help"
+    echo "usage: cltest -u <API URL>"
+    echo "              -a <admin email>"
+    echo "              [-N <root namespace>]"
+    echo "                  root namespace"
+    echo "                  - from 2 to 20 lower case alphanumeric characters"
+    echo "                  - first character must be letter"
+    echo "                  (default = 'cc')"
+    echo "              [-C <root currency>]"
+    echo "                  root currency"
+    echo "                  - from 1 to 5 lower case alphanumeric characters"
+    echo "                  - first character must be letter"
+    echo "                  (default = 'cc')"
+    echo "              [-h] show help" 
     echo
 }
 
@@ -30,8 +31,9 @@ CURRENCY_RE='^[a-z]{1,5}$'
 # default values
 ROOT_NAMESPACE=cc
 ROOT_CURRENCY=cc
+REINSTALL=1 # false
 
-while [ -n "$(echo $1 | grep '^-[uaNCh]$')" ]; do
+while [ -n "$(echo $1 | grep '^-[uaNCRh]$')" ]; do
     case $1 in
         -u ) if [[ $2 =~ $URL_RE ]]; then
                  API_URL=$2
@@ -75,15 +77,39 @@ while [ -n "$(echo $1 | grep '^-[uaNCh]$')" ]; do
                  exit 1
              fi
              ;;
-        -h ) usage
+	-R ) REINSTALL=0 # true
+             if [ -n $(pm2 ls | grep openmoney-api | grep -o online) ]; then
+                 echo "Stopping openmoney-api"
+                 pm2 stop "openmoney-api"
+
+                 # Uninstallation the database:
+                 sudo docker container stop db
+                 sudo docker container rm db
+                 #
+                 #command to find out if server is still running
+                 sudo netstat -ltnp | grep -w ':8080'
+                 #
+                 #command to kill processID
+                 #kill PID
+             fi
+             ;;
+        -h ) usage 
              exit 1
              ;;
         * )  echo "Unrecognized option"
-	     usage
+	     usage 
              exit 1
     esac
     shift
 done
+
+
+#echo "API URL = $API_URL"
+#echo "admin email = $ADMIN_EMAIL"
+#echo "root namespace = $ROOT_NAMESPACE"
+#echo "root currency = $ROOT_CURRENCY"
+
+
 
 if [ -z $API_URL ]; then
     echo "You must specify a valid URL for the API"
@@ -91,7 +117,7 @@ if [ -z $API_URL ]; then
     exit 1
 fi
 
-if [ -z $ADMIN_EMAIL ]; then
+if [ -z $ADMIN_EMAIL ]; then 
     echo "You must specify a valid email address for the administrator"
     usage
     exit 1
@@ -130,39 +156,58 @@ ROOT_CURRENCY=$ROOT_CURRENCY
 echo "ROOT_CURRENCY=$ROOT_CURRENCY" >> ./.env
 SMTP_CONFIG=smtp://localhost:25
 echo "SMTP_CONFIG=$SMTP_CONFIG" >> ./.env
+
+
+
 COUCHBASE_IP=`hostname -I | awk 'NR==1{print $1}'`
 echo "COUCHBASE_IP=$COUCHBASE_IP" >> ./.env
 cat ./.env # output the status of script variables so you know what your values are
 echo $COUCHBASE_ADMIN_PASSWORD > ./docker-scripts/cbap
 
-#install dependency applications
-sudo apt-get update
-sudo apt-get install -y npm net-tools apt-transport-https ca-certificates curl software-properties-common
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo apt-key fingerprint 0EBFCD88
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs) \
-   stable"
-sudo apt-get update
-sudo apt install apg
-sudo apt-get install -y docker-ce
-curl -sL https://deb.nodesource.com/setup_8.x | sudo bash -
-sudo apt-get install -y nodejs
-sudo npm install -g n
-sudo n 10.19.0
-# NOTE: https://github.com/barrysteyn/node-scrypt/issues/193
-# is preventing upgrade to node v12
-# solution is to change implementation to native crypto module in node
-#
-#pull the couchbase database docker container
-sudo docker pull couchbase:community-6.5.0
-#
+if [ -n $REINSTALL ]; then # this is the initial installation
+
+    #install dependency applications
+    sudo apt-get update
+    sudo apt-get install -y npm net-tools apt-transport-https ca-certificates curl software-properties-common
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    sudo apt-key fingerprint 0EBFCD88
+    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+       $(lsb_release -cs) \
+       stable"
+    sudo apt-get update
+    sudo apt install apg
+    sudo apt-get install -y docker-ce
+    curl -sL https://deb.nodesource.com/setup_8.x | sudo bash -
+    sudo apt-get install -y nodejs
+    sudo npm install -g n
+    sudo n 10.19.0
+    # NOTE: https://github.com/barrysteyn/node-scrypt/issues/193
+    # is preventing upgrade to node v12
+    # solution is to change implementation to native crypto module in node
+    #
+    # Pull the couchbase database docker container
+    sudo docker pull couchbase:community-6.5.0
+
+##else # is a re-installation   
+
+    # Uninstallation the database:
+##    sudo docker container stop db
+##    sudo docker container rm db
+    #
+    #command to find out if server is still running
+##    sudo netstat -ltnp | grep -w ':8080'
+    #
+    #command to kill processID
+    #kill PID
+
+fi # end of re-installation
+
 #run the docker container
 sudo docker run -dit --restart unless-stopped -d --name db \
     -p 8091-8094:8091-8094 -p 11210:11210 couchbase:community-6.5.0
 #
 #Wait for it
-sleep 40s
+sleep 30s
 #
 #setup the couchbase server installation and buckets
 curl -f -w '\n%{http_code}\n' \
@@ -243,7 +288,7 @@ curl -b /tmp/cookie \
     --data 'authType=sasl&autoCompactionDefined=false&bucketType=membase&evictionPolicy=fullEviction&flushEnabled=0&name=openmoney_stewards&ramQuotaMB=512&replicaIndex=0&replicaNumber=0&saslPassword=&threadsNumber=3'
 #
 #wait for it
-sleep 50s
+sleep 40s
 #
 #verify installation was correct
 sudo docker run couchbase:community-6.5.0 /bin/sh \
@@ -268,12 +313,3 @@ npm run test
 kill -STOP %1
 #bring to foreground it it's not dead yet.
 fg
-
-echo
-echo "====================================================================="
-echo "API URL        = $API_URL"
-echo "admin email    = $ADMIN_EMAIL"
-echo "admin password = $ADMIN_PASSWORD"
-echo "root namespace = $ROOT_NAMESPACE"
-echo "root currency  = $ROOT_CURRENCY"
-echo "====================================================================="

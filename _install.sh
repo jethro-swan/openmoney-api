@@ -1,135 +1,13 @@
 #!/bin/bash
-# installation script
+#installation script
 #
-# ./setup.sh -u <API URL> -a <admin email> [-N <root namespace>] [-C <root currency>]
+# (1) run  ./set-constants -u <API URL> -m <admin email> -N <root namespace> -C <root currency>
+# (2) run  ./install.sh
 
-usage()
-{
-    echo
-    echo "usage: setup.sh -u <API URL>"
-    echo "                -a <admin email>"
-    echo "                [-N <root namespace>]"
-    echo "                    root namespace"
-    echo "                    - from 2 to 20 lower case alphanumeric characters"
-    echo "                    - first character must be letter"
-    echo "                    (default = 'cc')"
-    echo "                [-C <root currency>]"
-    echo "                    root currency"
-    echo "                    - from 1 to 5 lower case alphanumeric characters"
-    echo "                    - first character must be letter"
-    echo "                    (default = 'cc')"
-    echo "                [-h] show help"
-    echo
-}
-
-URL_RE='^([a-zA-Z0-9](([a-zA-Z0-9-]){0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$'
-EMAIL_RE='^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$'
-NAMESPACE_RE='^[a-z]{1,20}$'
-CURRENCY_RE='^[a-z]{1,5}$'
-
-# default values
-ROOT_NAMESPACE=cc
-ROOT_CURRENCY=cc
-
-while [ -n "$(echo $1 | grep '^-[uaNCh]$')" ]; do
-    case $1 in
-        -u ) if [[ $2 =~ $URL_RE ]]; then
-                 API_URL=$2
-                 shift
-             else
-                 echo "API URL format is invalid: $2"
-                 usage
-                 exit 1
-             fi
-             ;;
-        -a ) if [[ $2 =~ $EMAIL_RE ]]; then
-                 ADMIN_EMAIL=$2
-                 shift
-             else
-                 echo "Admin email address format is invalid: $2"
-                 usage
-                 exit 1
-             fi
-             ;;
-        -N ) if [ -z $2 ]; then
-                 ROOT_NAMESPACE=cc # default
-                 shift
-             elif [[ $2 =~ $NAMESPACE_RE ]]; then
-                 ROOT_NAMESPACE=$2
-                 shift
-             else
-                 echo "Root namespace is invalid: $2"
-                 usage
-                 exit 1
-             fi
-             ;;
-        -C ) if [ -z $2 ]; then
-                 ROOT_CURRENCY=cc # default
-                 shift
-             elif [[ $2 =~ $CURRENCY_RE ]]; then
-                 ROOT_CURRENCY=$2
-                 shift
-             else
-                 echo "Root currency is invalid: $2"
-                 usage
-                 exit 1
-             fi
-             ;;
-        -h ) usage
-             exit 1
-             ;;
-        * )  echo "Unrecognized option"
-	     usage
-             exit 1
-    esac
-    shift
-done
-
-if [ -z $API_URL ]; then
-    echo "You must specify a valid URL for the API"
-    usage
-    exit 1
-fi
-
-if [ -z $ADMIN_EMAIL ]; then
-    echo "You must specify a valid email address for the administrator"
-    usage
-    exit 1
-fi
-
-# Replace all occurrences of "cloud.openmoney.cc" with OM API URL:
-sed -i "s/cloud\.openmoney\.cc/$API_URL/g" api/swagger/swagger.yaml
-sed -i "s/cloud\.openmoney\.cc/$API_URL/g" api/swagger/swagger.json
-sed -i "s/cloud\.openmoney\.cc/$API_URL/g" api/oauth2server/db/clients.js
-
-# Set non-default root currency and/or root namespace:
-#cp includes/om-api.config.example om-api.config
-#sed -i "s/admin@example\.net/$ADMIN_EMAIL/" om-api.config
-#sed -i "s/ROOT_SPACE=cc/ROOT_SPACE=$ROOT_NAMESPACE/" om-api.config
-#sed -i "s/ROOT_CURRENCY=cc/ROOT_CURRENCY=$ROOT_CURRENCY/" om-api.config
-
-#source includes/wait_progress_bar.sh
+source includes/wait_progress_bar.sh
 
 #Setting script variables.
-#source om-api.config
-COUCHBASE_ADMIN_USERNAME=admin
-echo "COUCHBASE_ADMIN_USERNAME=$COUCHBASE_ADMIN_USERNAME" > ./.env
-COUCHBASE_ADMIN_PASSWORD=$(apg -a 0 -m 16 -n 1)
-echo "COUCHBASE_ADMIN_PASSWORD=$COUCHBASE_ADMIN_PASSWORD" >> ./.env
-COUCHBASE_LO=127.0.0.1
-echo "COUCHBASE_LO=$COUCHBASE_LO" >> ./.env
-ADMIN_USERNAME=admin
-echo "ADMIN_USERNAME=$ADMIN_USERNAME" >> ./.env
-ADMIN_PASSWORD=$(apg -a 0 -m 16 -n 1)
-echo "ADMIN_PASSWORD=$ADMIN_PASSWORD" >> ./.env
-ADMIN_EMAIL=$ADMIN_EMAIL
-echo "ADMIN_EMAIL=$ADMIN_EMAIL" >> ./.env
-ROOT_SPACE=$ROOT_SPACE
-echo "ROOT_SPACE=$ROOT_NAMESPACE" >> ./.env
-ROOT_CURRENCY=$ROOT_CURRENCY
-echo "ROOT_CURRENCY=$ROOT_CURRENCY" >> ./.env
-SMTP_CONFIG=smtp://localhost:25
-echo "SMTP_CONFIG=$SMTP_CONFIG" >> ./.env
+source om-api.config
 COUCHBASE_IP=`hostname -I | awk 'NR==1{print $1}'`
 echo "COUCHBASE_IP=$COUCHBASE_IP" >> ./.env
 cat ./.env # output the status of script variables so you know what your values are
@@ -162,7 +40,7 @@ sudo docker run -dit --restart unless-stopped -d --name db \
     -p 8091-8094:8091-8094 -p 11210:11210 couchbase:community-6.5.0
 #
 #Wait for it
-sleep 40s
+sleep 30s
 #
 #setup the couchbase server installation and buckets
 curl -f -w '\n%{http_code}\n' \
@@ -243,7 +121,7 @@ curl -b /tmp/cookie \
     --data 'authType=sasl&autoCompactionDefined=false&bucketType=membase&evictionPolicy=fullEviction&flushEnabled=0&name=openmoney_stewards&ramQuotaMB=512&replicaIndex=0&replicaNumber=0&saslPassword=&threadsNumber=3'
 #
 #wait for it
-sleep 50s
+sleep 40s
 #
 #verify installation was correct
 sudo docker run couchbase:community-6.5.0 /bin/sh \
@@ -268,12 +146,3 @@ npm run test
 kill -STOP %1
 #bring to foreground it it's not dead yet.
 fg
-
-echo
-echo "====================================================================="
-echo "API URL        = $API_URL"
-echo "admin email    = $ADMIN_EMAIL"
-echo "admin password = $ADMIN_PASSWORD"
-echo "root namespace = $ROOT_NAMESPACE"
-echo "root currency  = $ROOT_CURRENCY"
-echo "====================================================================="

@@ -15,24 +15,20 @@ Stewards are the patrons of these namespaces, currencies, accounts and journals.
 git clone https://github.com/jethro-swan/openmoney-api
 cd openmoney-api
 ```
-Set initial values:
+Install, setting initial values:
 
-./set-constants -u &lt;API URL&gt; -a &lt;admin email&gt; [-N &lt;root namespace&gt;] [-C &lt;root currency&gt;]
+./setup.sh -u &lt;API URL&gt; -a &lt;admin email&gt; [-N &lt;root namespace&gt;] [-C &lt;root currency&gt;]
 
 e.g.
 ```sh
-./set-constants -u om-instance.somewhere.cc -a adi.minster@somewhere.cc
+./setup.sh -u om-instance.somewhere.cc -a adi.minster@somewhere.cc
 ```
 or
 ```sh
-./set-constants -u om-instance.somewhere.cc -a adi.minster@somewhere.cc -N ca -C hours
+./setup.sh -u om-instance.somewhere.cc -a adi.minster@somewhere.cc -N ca -C hours
 ```
-then run the installation script:
-```sh
-./install.sh
-```
-NB, this will generate passwords automatically for the Couchbase  adminstrator and the network adminstrator. These can then be found in the .env file.
 
+NB, this will generate passwords automatically for the Couchbase  administrator and the network administrator. These can then be found in the .env file.
 
 ### Run locally on port 8080
 ```sh
