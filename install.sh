@@ -9,16 +9,15 @@ source includes/wait_progress_bar.sh
 #Setting script variables.
 source om-api.config
 COUCHBASE_IP=`hostname -I | awk 'NR==1{print $1}'`
-cp om-api.config ./.env #
 echo "COUCHBASE_IP=$COUCHBASE_IP" >> ./.env
 cat ./.env # output the status of script variables so you know what your values are
 echo $COUCHBASE_ADMIN_PASSWORD > ./docker-scripts/cbap
 
+#install dependency applications
 sudo apt-get update
 sudo apt-get install -y npm net-tools apt-transport-https ca-certificates curl software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo apt-key fingerprint 0EBFCD88
-#sudo apt-key fingerprint '0EBFCD88'
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
    $(lsb_release -cs) \
    stable"
@@ -41,7 +40,7 @@ sudo docker run -dit --restart unless-stopped -d --name db \
     -p 8091-8094:8091-8094 -p 11210:11210 couchbase:community-6.5.0
 #
 #Wait for it
-sleep 60s
+sleep 30s
 #
 #setup the couchbase server installation and buckets
 curl -f -w '\n%{http_code}\n' \
