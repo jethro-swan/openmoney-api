@@ -66,21 +66,21 @@ https://cloud.openmoney.cc/docs/
 ### Uninstall
 
 ```sh
-./uninstalldb.sh
+./db_uninstall.sh
 ```
 
-The following script duplicates the essential later stages of install.sh, omitting the Node and Docker installation, etc.
-It is used to re-populate that initial database after it has been cleared using uninstalldb.sh (which was previously named uninstall.sh).
+The following script duplicates the essential later stages of setp.sh, omitting the Node and Docker installation, etc.
+It is used to re-populate that initial database after it has been cleared using db_uninstall.sh (which was previously named uninstall.sh).
 
 ```sh
-./reinstalldb.sh
+./db_reinstall.sh
 ```
 
 ### License
 
 Copyright [2019] [Dominique Legault]
 
-Minor revisions: 2019/11/03 - 2020/03/21 John Waters
+Minor revisions: 2019/11/03 - 2020/03/23 John Waters
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
