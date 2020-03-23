@@ -46,7 +46,7 @@ sudo npm install pm2 -g
 pm2 start app.js --name "openmoney-api"
 ```
 
-### Start and Stop DB
+### Start and stop DB
 
 ```sh
 npm run start:db
