@@ -14,7 +14,7 @@ sudo docker run -dit --restart unless-stopped -d --name db \
     -p 8091-8094:8091-8094 -p 11210:11210 couchbase:community-6.5.0
 #
 #Wait for it
-sleep 60s
+sleep 30s
 #
 #setup the couchbase server installation and buckets
 curl -f -w '\n%{http_code}\n' \
