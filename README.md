@@ -76,11 +76,11 @@ It is used to re-populate that initial database after it has been cleared using 
 ./db_reinstall.sh
 ```
 
-### License
+### License (core OM API code)
 
-Copyright [2019] [Dominique Legault]
+Copyright &copy; [2019] [Dominique Legault]
 
-Minor revisions: 2019/11/03 - 2020/03/23 John Waters
+Additional or replacement scripts: 2019/11/03 - 2020/03/24 John Waters
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
