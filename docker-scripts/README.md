@@ -16,7 +16,7 @@ It is assumed that
 (1) Create backup directory
 ```
 cd
-mkdir backup
+mkdir backups
 ```
 
 (2) Shorten absolute path to script
