@@ -37,8 +37,12 @@ npm run start
 Control-C to quit
 
 ### Run in a background service
+Install PM2 gloally:
 ```sh
 sudo npm install pm2 -g
+```
+Run OpenMoney API service in the background:
+```sh
 pm2 start app.js --name "openmoney-api"
 ```
 
