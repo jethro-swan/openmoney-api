@@ -13,7 +13,7 @@ env:
     - "COUCHBASE_LO=\"$(/sbin/ifconfig lo | grep 'inet addr' | cut -d: -f2 | awk '{print $1}')\""
     - ADMIN_USERNAME=admin
     - ADMIN_PASSWORD=password
-    - ADMIN_EMAIL=admin@openmoney.network
+    - ADMIN_EMAIL=om-test@lrc.org.uk
     - ROOT_SPACE=cc
     - ROOT_CURRENCY=cc
 
