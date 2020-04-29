@@ -1,8 +1,8 @@
 ### PLEASE NOTE:  
 
-The installation stopped working on Ubuntu 16.04.x and 18.04.x in January 2020, when Node 8 reached the end of its supported life.
+The installation has been tested on Ubuntu 19.10 and 20.04.
 
-As it is, it can still be installed on Ubuntu 19.10.
+Installation on Ubuntu 18.04 or 16.04 no longer works without much wailing and gnashing of teeth (for which evolving nodegremlins appear to be to blame).
 
 ### openmoney-api
 
