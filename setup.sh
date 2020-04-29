@@ -31,6 +31,19 @@ CURRENCY_RE='^[a-z]{1,5}$'
 ROOT_NAMESPACE=cc
 ROOT_CURRENCY=cc
 
+# Temporary fix (2020/04/29) to substitute docker.io for docker-ce (which Ubuntu 20.04 lacks at this point)
+UV=$(lsb_release -r -s)
+re20="^20\.(04|10)(\.\d)?$"
+#if [[ $UV =~ "20.04" ]]; then
+if [[ $UV =~ $re20 ]]; then
+    DOCKER_VERSION="docker.io"
+else
+    DOCKER_VERSION="docker-ce"
+fi
+echo "This is Ubuntu $UV therefore using docker.io instead of docker-ce"
+
+
+
 while [ -n "$(echo $1 | grep '^-[uaNCh]$')" ]; do
     case $1 in
         -u ) if [[ $2 =~ $URL_RE ]]; then
@@ -145,7 +158,9 @@ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubun
    stable"
 sudo apt-get update
 sudo apt install apg
-sudo apt-get install -y docker-ce
+# Temporary fix (2020/04/29) to substitute docker.io for docker-ce if Ubuntu 20.04
+sudo apt-get install -y $DOCKER_VERSION
+#sudo apt-get install -y docker-ce
 curl -sL https://deb.nodesource.com/setup_8.x | sudo bash -
 sudo apt-get install -y nodejs
 sudo npm install -g n
