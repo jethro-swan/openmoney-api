@@ -37,7 +37,7 @@ npm run start
 Control-C to quit
 
 ### Run in a background service
-Install PM2 gloally:
+Install PM2 globally:
 ```sh
 sudo npm install pm2 -g
 ```
