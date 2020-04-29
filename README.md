@@ -1,6 +1,6 @@
 ### PLEASE NOTE:  
 
-The installation has been tested on Ubuntu 19.10 and 20.04.
+The installation has been tested on Ubuntu 19.10 but, although it passes the existing tests, does not yet work on 20.04.
 
 Ubuntu 20.04 lacks _docker-ce_ at this point so a temporary fix has been added to _setup.sh_ to substitute _docker.io_ (and that has passed all of the existing tests).
 
