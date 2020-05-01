@@ -37,11 +37,11 @@ re20="^20\.(04|10)(\.\d)?$"
 #if [[ $UV =~ "20.04" ]]; then
 if [[ $UV =~ $re20 ]]; then
     DOCKER_VERSION="docker.io"
+    echo "This is Ubuntu $UV therefore using docker-ce"
 else
     DOCKER_VERSION="docker-ce"
+    echo "This is Ubuntu $UV therefore using docker.io instead of docker-ce"
 fi
-echo "This is Ubuntu $UV therefore using docker.io instead of docker-ce"
-
 
 
 while [ -n "$(echo $1 | grep '^-[uaNCh]$')" ]; do
