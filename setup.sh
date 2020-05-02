@@ -40,7 +40,7 @@ if [[ $UV =~ $re20 ]]; then
     echo "This is Ubuntu $UV therefore using docker-ce"
 else
     DOCKER_VERSION="docker-ce"
-    echo "This is Ubuntu $UV therefore using docker.io instead of docker-ce"
+    echo "This is Ubuntu $UV therefore using docker.io"
 fi
 
 
