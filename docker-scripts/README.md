@@ -24,7 +24,7 @@ mkdir backups
 cd ~/openmoney-api/docker-scripts
 ./docker-bash
 ```
-... and the create the directory _/backup_ ...
+... and the create the _/backup_ directory ...
 
 ```
 root@<container ID>:/# mkdir backup
@@ -36,6 +36,7 @@ root@<container ID>:/# exit
 cd
 ln -s openmoney-api/docker-scripts .
 ```
+(this is just to make the _crontab_ entry more readable)
 
 (4) Set up cron job
 ```
