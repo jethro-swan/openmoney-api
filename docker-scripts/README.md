@@ -32,6 +32,4 @@ It is also assumed that
 
 - **couchbase_start** is used to start the Couchbase server, e.g. after rebooting the VM. 
 
-#### Obsolete script
-
-- **cron-setup** is an obsolete script since incorporated into _create_backup_system_
+(The _cron-setup_ script is obsolete, having been incorporated into _create_backup_system_ script.)
