@@ -12,7 +12,7 @@ It is also assumed that
 - user "om" has passwordless sudo access
 
 
-### Current scripts:
+#### Current scripts:
 
 - **list_backups** is used to list the backup archives currently available within the Docker container.
   Each backup file is named with a date-/time-stamp (YYYYMMDDhhmm), e.g.
@@ -32,6 +32,6 @@ It is also assumed that
 
 - **couchbase_start** is used to start the Couchbase server, e.g. after rebooting the VM. 
 
-### Obsolete script
+#### Obsolete script
 
 - **cron-setup** is an obsolete script since incorporated into _create_backup_system_
