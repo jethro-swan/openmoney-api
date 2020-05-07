@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# This script is used to set up the automated backup system to work with thei
+# Dockerized version of Couchbase (6.x.x) used with this version of the Open
+# Money API.
+#
+# It is assumed that 
+# - the OM code (including the Dockerized Couchbase) is isolated within a VM 
+# - the only non-root user is "om"
+# - user "om" has passwordless sudo access
+
+# The /backup/ directory inside the Docker container is used by the Couchbase
+# restoration script (openmoney-api/docker-scripts/couchbase_restore) ...
+sudo docker exec  `sudo docker ps -q` mkdir /backup
+# ... and the contents of that directory are copied to the VM directory
+# /home/om/backups/ to allow replication elsewhere (via Rsync):
+mkdir ~/backups
+
+
+# The absolute path to script is shortened (simply to make the crontab entry
+# more readable) ...
+cd
+ln -s openmoney-api/docker-scripts .
+# ... and the cron task to automate backups is set up:
+(crontab -l 2>/dev/null; echo "30 * * * * /home/om/docker-scripts/couchbase_backup") | crontab -

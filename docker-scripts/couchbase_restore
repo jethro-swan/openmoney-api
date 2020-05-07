@@ -6,6 +6,9 @@
 
 SNAPSHOT=$1
 
+# The Couchbase DB is cleared:
+~/openmoney-api/db_uninstall.sh
+
 # The value of COUCHBASE_ADMIN_PASSWORD is retrieved.
 COUCHBASE_ADMIN_PASSWORD=$(cat ./cbap)
 
@@ -22,3 +25,4 @@ restore 'default'
 restore 'openmoney_global'
 restore 'oauth2Server'
 restore 'openmoney_stewards'
+

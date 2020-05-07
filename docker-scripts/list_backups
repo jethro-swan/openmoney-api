@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sudo docker exec `sudo docker ps -q` ls /backup
