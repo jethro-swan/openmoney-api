@@ -1,4 +1,4 @@
-### Assumptions
+### Docker and backup management scripts
 
 A collection of scripts to work with the Dockerized version of Couchbase (6.x.x)
 used with this version of the Open Money API.
@@ -12,7 +12,7 @@ It is also assumed that
 - user "om" has passwordless sudo access
 
 
-The scripts are:
+### Current scripts:
 
 - **list_backups** is used to list the backup archives currently available within the Docker container.
   Each backup file is named with a date-/time-stamp (YYYYMMDDhhmm), e.g.
@@ -31,5 +31,7 @@ The scripts are:
 - **couchbase_stop** is used to stop the Couchbase server safely, e.g. before rebooting the VM. 
 
 - **couchbase_start** is used to start the Couchbase server, e.g. after rebooting the VM. 
+
+### Obsolete script
 
 - **cron-setup** is an obsolete script since incorporated into _create_backup_system_
