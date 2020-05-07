@@ -14,21 +14,22 @@ It is also assumed that
 
 The scripts are:
 
-- **list_backups**  Used to list the available backups within the Docker container.
+- **list_backups** is used to list the backup archives currently available within the Docker container.
   Each backup file is named with a date-/time-stamp (YYYYMMDDhhmm), e.g.
     202005061400
 
-- **couchbase_restore**  Used to restore Couchbase to an available saved state, e.g.
+- **couchbase_restore** is used to restore Couchbase to an available saved state, e.g.
     
     ~/openmoney-api/docker-scripts/couchbase_restore 202005061400
 
-- **couchbase_backup**  Used by the Couchbase backup cron task.
+- **couchbase_backup** is used by the Couchbase backup _cron_ task.
 
-- **create_backup_system**  Create the backup directors and set up the cron task.
-- **docker-bash**  Open BASH inside the Couchbase Docker container.
+- **create_backup_system** is used to create the backup directories and set up the _cron_ task.
 
-- **couchbase_stop**  Used to stop the Couchbase server safely, e.g. before rebooting the VM. 
+- **docker-bash** is used to open a BASH terminal inside the Couchbase Docker container.
 
-- **couchbase_start**  Used to start the Couchbase server, e.g. after rebooting the VM. 
+- **couchbase_stop** is used to stop the Couchbase server safely, e.g. before rebooting the VM. 
 
-- **cron-setup** [An obsolete script since incorporated into _create_backup_system_]
+- **couchbase_start** is used to start the Couchbase server, e.g. after rebooting the VM. 
+
+- **cron-setup** is an obsolete script since incorporated into _create_backup_system_
