@@ -27,15 +27,11 @@ cd openmoney-api
 ```
 Install, setting initial values:
 
-./setup.sh -u &lt;API URL&gt; -a &lt;admin email&gt; [-N &lt;root namespace&gt;] [-C &lt;root currency&gt;]
+./setup.sh -u &lt;API URL&gt; -a &lt;admin email&gt;
 
 e.g.
 ```sh
 ./setup.sh -u om-instance.somewhere.cc -a adi.minster@somewhere.cc
-```
-or
-```sh
-./setup.sh -u om-instance.somewhere.cc -a adi.minster@somewhere.cc -N ca -C hours
 ```
 
 NB, this will generate passwords automatically for the Couchbase  administrator and the network administrator. These can then be found in the .env file.
