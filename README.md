@@ -22,7 +22,7 @@ Stewards are the patrons of these namespaces, currencies, accounts and journals.
 ### Install locally
 
 ```sh
-git clone https://github.com/jethro-swan/openmoney-api
+git clone https://github.com/om-tools/openmoney-api
 cd openmoney-api
 ```
 Install, setting initial values:
