@@ -1,6 +1,6 @@
 ### Requirements
 
-Ubuntu 19.10
+Ubuntu 19.10 (possibly 19.04)
 
     PLEASE NOTE:  
 
